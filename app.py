@@ -126,7 +126,7 @@ def main():
     def clear_cr(): st.session_state['cr']=''; st.session_state['submitted']=None
     def clear_acr(): st.session_state['acr']=''; st.session_state['submitted']=None
     with tabs[0]:
-        st.subheader(T('Datos de entrada','Input data'))
+        st.subheader(T('Datos de entrada','Input data'), anchor=False)
         left,right = st.columns(2)
         with left:
             age_text=st.text_input(T('Edad (años)','Age (years)'),key='age',placeholder=T('Ingresa la edad','Enter age'))
@@ -169,7 +169,7 @@ def main():
         elif st.session_state.get('submitted') is not None:
             st.caption(T('Los datos cambiaron. Pulsa Calcular para actualizar.','Inputs changed. Press Calculate to update.'))
         if primary is not None:
-            st.divider(); st.subheader(T('Resultados','Results'))
+            st.divider(); st.subheader(T('Resultados','Results'), anchor=False)
             c1,c2=st.columns([2,1]); c1.metric(names[primary],f'{shown} {UNITS}'); c2.metric(T('Categoría de filtración','GFR category'),G_NAMES[gi])
             st.caption(descriptions[gi]+' · '+T('Categoría basada en el resultado redondeado de laboratorio.','Category based on the rounded laboratory result.'))
             if g_index(value)!=gi:
@@ -180,7 +180,7 @@ def main():
             if shown<15: st.warning(T('Estimación muy baja: busca valoración médica pronta; si es un hallazgo nuevo o hay síntomas graves, atención urgente.','Very low estimate: seek prompt medical assessment; if newly found or severe symptoms are present, seek urgent care.'))
             if 18<=age<=25: st.caption(T('En edades de 18–25 años, NIDDK recomienda también considerar CKiD U25 (no incluida aquí).','For ages 18–25, NIDDK recommends also considering CKiD U25 (not included here).'))
             if len(results)>1:
-                st.subheader(T('Comparación de estimaciones','Comparison of estimates'))
+                st.subheader(T('Comparación de estimaciones','Comparison of estimates'), anchor=False)
                 df=pd.DataFrame({T('Ecuación','Equation'):[names[k] for k in results],UNITS:[reported(v['value']) for v in results.values()]})
                 st.dataframe(df,hide_index=True,use_container_width=True)
                 if 'both' in results:
@@ -190,7 +190,7 @@ def main():
                 st.metric(T('Categoría de albuminuria','Albuminuria category'),f'A{ai+1}')
                 st.caption(T('Consulta la matriz en la pestaña Clasificación KDIGO.','See the matrix in the KDIGO categories tab.'))
     with tabs[1]:
-        st.header(T('Procedimiento matemático','Mathematical procedure'))
+        st.header(T('Procedimiento matemático','Mathematical procedure'), anchor=False)
         st.caption(T('Se conserva precisión interna; los decimales visibles son solo para auditoría.','Internal precision is retained; displayed decimals are for auditing only.'))
         if not results: st.info(T('Calcula primero un ejemplo o introduce tus valores.','Calculate an example or enter your values first.'))
         else:
@@ -201,7 +201,7 @@ def main():
                     st.latex(r'\times '.join(f'{x:.10g}' for x in v['factors'])+r'\approx '+f'{v["value"]:.8g}')
                     st.write(T('Resultado reportado: ','Reported result: ')+f'**{reported(v["value"])} {UNITS}**')
     with tabs[2]:
-        st.header(T('Ecuaciones y constantes','Equations and constants'))
+        st.header(T('Ecuaciones y constantes','Equations and constants'), anchor=False)
         st.caption(T('SCr: creatinina sérica en mg/dL. SCys: cistatina C sérica en mg/L. Age: edad en años. F: multiplicador por sexo.','SCr: serum creatinine in mg/dL. SCys: serum cystatin C in mg/L. Age: age in years. F: sex multiplier.'))
         for k in ('cr','cys','both'):
             st.markdown('**'+names[k]+'**'); st.latex('eGFR = '+FORMULAS[k])
@@ -209,11 +209,11 @@ def main():
         st.write(T('min selecciona el menor de dos valores; max selecciona el mayor. κ y 0.8 son puntos de inflexión matemáticos, no límites de normalidad.','min selects the smaller value; max selects the larger. κ and 0.8 are mathematical knots, not normal reference limits.'))
         st.caption(T('Fuentes: Inker 2012, tabla 2; Inker 2021, tabla 2; Miller 2022, tablas 3–4; NIDDK. Para cistatina C 2012 se usa 0.996, tal como en el artículo original y NIDDK.','Sources: Inker 2012, Table 2; Inker 2021, Table 2; Miller 2022, Tables 3–4; NIDDK. For 2012 cystatin C we use 0.996 as in the original paper and NIDDK.'))
     with tabs[3]:
-        st.header(T('Clasificación KDIGO 2024','KDIGO 2024 classification'))
+        st.header(T('Clasificación KDIGO 2024','KDIGO 2024 classification'), anchor=False)
         st.write(T('La ERC se define por anomalías de estructura o función renal durante al menos tres meses, con implicaciones para la salud. Se clasifica por causa, categoría G y categoría A (CGA).','CKD is defined by abnormalities of kidney structure or function for at least three months, with implications for health. It is classified by cause, GFR category and albuminuria category (CGA).'))
         st.dataframe(pd.DataFrame({'G':G_NAMES,UNITS:G_RANGES,T('Descripción','Description'):descriptions}),hide_index=True,use_container_width=True)
         st.dataframe(pd.DataFrame({'A':['A1','A2','A3'],'mg/g':['<30','30–300','>300'],'mg/mmol':['<3','3–30','>30'],T('Descripción','Description'):T(['Normal a ligeramente aumentada','Moderadamente aumentada','Gravemente aumentada'],['Normal to mildly increased','Moderately increased','Severely increased'])}),hide_index=True,use_container_width=True)
-        st.subheader(T('Matriz de categorías pronósticas','Prognostic category matrix'))
+        st.subheader(T('Matriz de categorías pronósticas','Prognostic category matrix'), anchor=False)
         # Original HTML rendering of category facts, not a copied KDIGO image.
         html='<div style="overflow-x:auto"><table style="width:100%;border-collapse:separate;border-spacing:4px;text-align:center;font-size:0.9rem"><thead><tr><th>G / A</th><th>A1</th><th>A2</th><th>A3</th></tr></thead><tbody>'
         for i,g in enumerate(G_NAMES):
@@ -229,21 +229,21 @@ def main():
         st.warning(T('La matriz se interpreta en el contexto de ERC. G1/G2 con A1, sin otros marcadores de daño renal, no constituyen ERC. No asumir cronicidad con una sola medición.','The matrix is interpreted in the context of CKD. G1/G2 with A1 and no other markers of kidney damage do not constitute CKD. Do not assume chronicity from a single measurement.'))
         st.caption(T('Fuente: KDIGO 2024, S126–S127 y tablas 1–3, S137. Límites de RAC por unidad según la guía (equivalencias aproximadas).','Source: KDIGO 2024, S126–S127 and Tables 1–3, S137. Unit-specific ACR thresholds follow the guideline (approximate equivalence).'))
     with tabs[4]:
-        st.header(T('Calidad analítica y valores de referencia','Analytical quality and reference intervals'))
+        st.header(T('Calidad analítica y valores de referencia','Analytical quality and reference intervals'), anchor=False)
         st.dataframe(pd.DataFrame({T('Marcador','Marker'):T(['Creatinina','Cistatina C'],['Creatinine','Cystatin C']),T('Trazabilidad','Traceability'):['IDMS','ERM-DA471/IFCC'],'CV':['<2.3%','<2.0%'],T('Sesgo deseable','Desirable bias'):['<3.7%','<3.2%']}),hide_index=True,use_container_width=True)
         st.write(T('Objetivos analíticos de KDIGO, tabla 11, S184. Se prefiere creatinina enzimática cuando sea posible; medir ambos marcadores en la misma muestra. La aplicación no verifica calibración ni calidad de las muestras.','Analytical targets from KDIGO, Table 11, S184. Enzymatic creatinine is preferred where possible; measure both markers on the same sample. The app does not verify calibration or sample quality.'))
-        st.subheader(T('Unidades e intervalos','Units and reference intervals'))
+        st.subheader(T('Unidades e intervalos','Units and reference intervals'), anchor=False)
         st.dataframe(pd.DataFrame({T('Variable','Variable'):T(['Creatinina','Cistatina C','RAC','eTFG'],['Creatinine','Cystatin C','ACR','eGFR']),T('Unidades','Units'):['mg/dL / µmol/L','mg/L','mg/g / mg/mmol',UNITS],T('Referencia','Reference'):T(['Según laboratorio y método','Según laboratorio y método','Categorías A1–A3','Categorías G1–G5'],['Laboratory and method specific','Laboratory and method specific','A1–A3 categories','G1–G5 categories'])}),hide_index=True,use_container_width=True)
         st.write(T('Creatinina: µmol/L ÷ 88.4 = mg/dL. RAC: mg/g × 0.113 ≈ mg/mmol. No se asignan intervalos universales de creatinina o cistatina C sin documentación del método.','Creatinine: µmol/L ÷ 88.4 = mg/dL. ACR: mg/g × 0.113 ≈ mg/mmol. No universal creatinine or cystatin C intervals are assigned without method documentation.'))
-        st.subheader(T('Limitaciones','Limitations'))
+        st.subheader(T('Limitaciones','Limitations'), anchor=False)
         st.write(T('La eTFG no es una TFG medida. Esta herramienta está dirigida a adultos con función renal relativamente estable; no se diseñó para embarazo, lesión renal aguda, diálisis o población pediátrica. En trasplante renal o enfermedad grave se requiere interpretación especializada. Masa muscular, dieta, amputaciones y ciertos fármacos afectan la creatinina; inflamación, obesidad, tabaquismo, alteraciones tiroideas y corticoides pueden afectar la cistatina C. No usar para ajustar fármacos de manera autónoma.','eGFR is not measured GFR. This tool is intended for adults with relatively stable kidney function; it is not designed for pregnancy, acute kidney injury, dialysis or children. Transplant recipients or severe illness require specialist interpretation. Muscle mass, diet, amputations and some drugs affect creatinine; inflammation, obesity, smoking, thyroid disorders and corticosteroids may affect cystatin C. Do not use for independent drug dosing.'))
     with tabs[5]:
-        st.header(T('Fundamento científico','Scientific basis'))
+        st.header(T('Fundamento científico','Scientific basis'), anchor=False)
         st.write(T('Inker 2012 desarrolló las ecuaciones con 5,352 participantes y validó externamente en 1,119. En esa validación, P30 fue 85.9% para cistatina C 2012 y 91.5% para la combinada 2012 (no la ecuación 2021). P30 indica la proporción de estimaciones dentro del 30% de la TFG medida, no la probabilidad de que un resultado individual sea correcto.','Inker 2012 developed equations with 5,352 participants and externally validated them in 1,119. In that validation, P30 was 85.9% for 2012 cystatin C and 91.5% for the 2012 combined equation (not the 2021 equation). P30 is the proportion within 30% of measured GFR, not the probability that an individual result is correct.'))
         st.write(T('Las ecuaciones CKD-EPI 2021 fueron desarrolladas sin coeficiente racial y la estimación combinada mostró mejor exactitud global que las estimaciones individuales en la validación original. KDIGO recomienda la ecuación combinada cuando está disponible cistatina C. El software no cuenta con validación clínica propia ni específica para México.','The 2021 CKD-EPI equations were developed without a race coefficient; the combined estimate had better overall accuracy than single-marker estimates in original validation. KDIGO recommends the combined equation when cystatin C is available. This software has no independent clinical or Mexico-specific validation.'))
-        st.subheader(T('Referencias bibliográficas','References'))
+        st.subheader(T('Referencias bibliográficas','References'), anchor=False)
         st.markdown('''1. Inker LA, et al. Estimating Glomerular Filtration Rate from Serum Creatinine and Cystatin C. *N Engl J Med*. 2012;367:20–29. [DOI](https://doi.org/10.1056/NEJMoa1114248).\n2. Inker LA, et al. New Creatinine- and Cystatin C–Based Equations to Estimate GFR without Race. *N Engl J Med*. 2021;385:1737–1749. [DOI](https://doi.org/10.1056/NEJMoa2102953).\n3. Miller WG, et al. National Kidney Foundation Laboratory Engagement Working Group Recommendations for Implementing the CKD-EPI 2021 Race-Free Equations for Estimated Glomerular Filtration Rate: Practical Guidance for Clinical Laboratories. *Clin Chem*. 2022;68:511–520. [DOI](https://doi.org/10.1093/clinchem/hvab278).\n4. KDIGO CKD Work Group. KDIGO 2024 Clinical Practice Guideline for the Evaluation and Management of Chronic Kidney Disease. *Kidney Int*. 2024;105(4S):S117–S314. [DOI](https://doi.org/10.1016/j.kint.2023.10.018).\n5. NIDDK. [eGFR Equations for Adults]('''+NIDDK+''').''')
-        st.subheader(T('Privacidad y alcance','Privacy and scope'))
+        st.subheader(T('Privacidad y alcance','Privacy and scope'), anchor=False)
         st.write(T('La aplicación no implementa bases de datos, exportación ni registro de valores clínicos. Los datos se procesan en la sesión de Streamlit; el proveedor de alojamiento puede tratar información técnica. Evita datos identificables.','The app does not implement databases, exports or clinical-value logging. Inputs are processed in the Streamlit session; the hosting provider may process technical information. Avoid identifying data.'))
     st.divider()
     st.markdown('**'+T('Autores','Authors')+'**')
