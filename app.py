@@ -95,7 +95,7 @@ def main():
     import pandas as pd
     st.set_page_config(page_title='Calculadora eTFG', page_icon='🧪',layout='wide')
     st.markdown('''<style>
-    .block-container {max-width:1120px;padding-top:2rem;padding-bottom:2rem;}
+    .block-container {max-width:1120px;padding-top:5rem;padding-bottom:2rem;}
     div[data-testid="stMetric"] {border:1px solid #8b9da344;border-radius:12px;padding:16px;}
     .renal-kicker {color:#008b83;font-size:.8rem;letter-spacing:.13em;font-weight:700;}
     .renal-title {font-size:2.5rem;font-weight:750;line-height:1.1;margin:.3rem 0;}
