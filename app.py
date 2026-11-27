@@ -4,7 +4,7 @@ from decimal import Decimal, ROUND_HALF_UP
 
 VERSION = '1.0'
 UPDATED = '26/11/2026'
-AUTHORS = ['Abel Suárez-Castro', 'Carmen I. Bárcenas-López', 'Fernando Rosales-López', 'Genaro F. Sánchez-Mejorada']
+AUTHORS = ['Abel Suárez-Castro', 'Carmen I. Bárcenas-López', 'Genaro F. Sánchez-Mejorada', 'Fernando Rosales-López']
 UNITS = 'mL/min/1.73 m²'
 NIDDK = 'https://www.niddk.nih.gov/research-funding/research-programs/kidney-clinical-research-epidemiology/laboratory/glomerular-filtration-rate-equations/adults'
 RISK = ((0,1,2),(0,1,2),(1,2,3),(2,3,3),(3,3,3),(3,3,3))
