@@ -182,7 +182,6 @@ def main():
             if len(results)>1:
                 st.subheader(T('Comparación de estimaciones','Comparison of estimates'))
                 df=pd.DataFrame({T('Ecuación','Equation'):[names[k] for k in results],UNITS:[reported(v['value']) for v in results.values()]})
-                st.bar_chart(df,x=T('Ecuación','Equation'),y=UNITS,horizontal=True,color='#008b83')
                 st.dataframe(df,hide_index=True,use_container_width=True)
                 if 'both' in results:
                     delta=results['cys']['value']-results['cr']['value']
