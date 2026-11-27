@@ -110,7 +110,7 @@ def main():
     risks = T(['Bajo','Moderado','Alto','Muy alto'],['Low','Moderate','High','Very high'])
     st.sidebar.markdown('**CKD-EPI 2012 / 2021 · KDIGO 2024**')
     st.sidebar.caption(T('Adultos ≥18 años. Sin coeficiente racial.','Adults ≥18 years. No race coefficient.'))
-    st.markdown(f'<div class="renal-kicker">{T("MEDICINA · QUÍMICA CLÍNICA","MEDICINE · CLINICAL CHEMISTRY")}</div><div class="renal-title">{title}</div><div class="renal-sub">{T("Tasa de filtración glomerular estimada · Ecuaciones CKD-EPI", "Estimated glomerular filtration rate · CKD-EPI equations")}</div>',unsafe_allow_html=True)
+    st.markdown(f'<div class="renal-kicker">{T("MEDICINA · BIOQUÍMICA CLÍNICA","MEDICINE · CLINICAL BIOCHEMISTRY")}</div><div class="renal-title">{title}</div><div class="renal-sub">{T("Tasa de filtración glomerular estimada · Ecuaciones CKD-EPI", "Estimated glomerular filtration rate · CKD-EPI equations")}</div>',unsafe_allow_html=True)
     st.caption('CKD-EPI 2012 / 2021  ·  KDIGO 2024  ·  v'+VERSION)
     st.info(T('Herramienta académica y educativa para adultos. No diagnostica enfermedad renal ni sustituye la valoración médica. No introduzcas nombres, expedientes ni otros datos identificables.', 'Academic and educational tool for adults. It does not diagnose kidney disease or replace medical assessment. Do not enter names, medical record numbers or other identifying information.'))
     tabs = st.tabs(T(['Calculadora','Cálculos intermedios','Constantes y fórmulas','Clasificación KDIGO','Calidad analítica','Referencias'],['Calculator','Intermediate calculations','Constants and equations','KDIGO categories','Analytical quality','References']))
@@ -248,7 +248,7 @@ def main():
     st.divider()
     st.markdown('**'+T('Autores','Authors')+'**')
     st.write(' · '.join(AUTHORS))
-    st.caption(T('Proyecto académico de medicina y química clínica. Versión preliminar ','Academic project in medicine and clinical chemistry. Preliminary version ')+VERSION+' · '+T('Última actualización: ','Last updated: ')+UPDATED)
+    st.caption(T('Proyecto académico de medicina y bioquímica clínica. Versión preliminar ','Academic project in medicine and clinical biochemistry. Preliminary version ')+VERSION+' · '+T('Última actualización: ','Last updated: ')+UPDATED)
     st.caption(T('No sustituye la valoración médica. No es un dispositivo médico validado.','Does not replace medical assessment. Not a validated medical device.'))
 
 
