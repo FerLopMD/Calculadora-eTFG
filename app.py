@@ -131,7 +131,7 @@ def main():
         with left:
             age_text=st.text_input(T('Edad (años)','Age (years)'),key='age',placeholder=T('Ingresa la edad','Enter age'))
         with right:
-            sex=st.selectbox(T('Sexo utilizado en la ecuación','Sex used by the equation'),['','F','M'],format_func=lambda x: {'':T('Selecciona una opción','Select an option'),'F':T('Femenino','Female'),'M':T('Masculino','Male')}[x],key='sex')
+            sex=st.selectbox(T('Sexo','Sex'),['','F','M'],format_func=lambda x: {'':T('Selecciona una opción','Select an option'),'F':T('Femenino','Female'),'M':T('Masculino','Male')}[x],key='sex')
         left,right = st.columns(2)
         with left:
             cr_unit=st.radio(T('Unidad de creatinina','Creatinine unit'),['mg/dL','µmol/L'],horizontal=True,key='cr_unit',on_change=clear_cr)
