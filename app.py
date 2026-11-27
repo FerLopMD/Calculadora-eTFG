@@ -129,20 +129,20 @@ def main():
         st.subheader(T('Datos de entrada','Input data'))
         left,right = st.columns(2)
         with left:
-            age_text=st.text_input(T('Edad (años)','Age (years)'),key='age',placeholder='55')
+            age_text=st.text_input(T('Edad (años)','Age (years)'),key='age',placeholder=T('Ingresa la edad','Enter age'))
         with right:
-            sex=st.selectbox(T('Sexo utilizado en la ecuación','Sex used by the equation'),['','F','M'],format_func=lambda x: {'':T('Seleccionar','Select'),'F':T('Femenino','Female'),'M':T('Masculino','Male')}[x],key='sex')
+            sex=st.selectbox(T('Sexo utilizado en la ecuación','Sex used by the equation'),['','F','M'],format_func=lambda x: {'':T('Selecciona una opción','Select an option'),'F':T('Femenino','Female'),'M':T('Masculino','Male')}[x],key='sex')
         left,right = st.columns(2)
         with left:
             cr_unit=st.radio(T('Unidad de creatinina','Creatinine unit'),['mg/dL','µmol/L'],horizontal=True,key='cr_unit',on_change=clear_cr)
-            cr_text=st.text_input(T('Creatinina sérica','Serum creatinine')+f' ({cr_unit})',key='cr',placeholder=T('Opcional','Optional'))
+            cr_text=st.text_input(T('Creatinina sérica','Serum creatinine')+f' ({cr_unit})',key='cr',placeholder=T('Ingresa el valor','Enter value'))
         with right:
             st.caption(T('Introduce al menos un marcador de filtración.','Enter at least one filtration marker.'))
-            cys_text=st.text_input(T('Cistatina C sérica (mg/L)','Serum cystatin C (mg/L)'),key='cys',placeholder=T('Opcional','Optional'))
+            cys_text=st.text_input(T('Cistatina C sérica (mg/L)','Serum cystatin C (mg/L)'),key='cys',placeholder=T('Ingresa el valor','Enter value'))
         st.caption(T('Para la ecuación combinada, se prefieren resultados de ambos marcadores obtenidos de la misma muestra. Cambiar unidades borra el campo correspondiente.','For the combined equation, both markers should preferably be measured in the same sample. Changing units clears the corresponding field.'))
         with st.expander(T('Albuminuria (opcional)','Albuminuria (optional)'),expanded=True):
             acr_unit=st.radio(T('Unidad de RAC urinaria','Urine ACR unit'),['mg/g','mg/mmol'],horizontal=True,key='acr_unit',on_change=clear_acr)
-            acr_text=st.text_input(T('Relación albúmina/creatinina urinaria (RAC)','Urine albumin-to-creatinine ratio (ACR)')+f' ({acr_unit})',key='acr',placeholder=T('Opcional','Optional'))
+            acr_text=st.text_input(T('Relación albúmina/creatinina urinaria (RAC)','Urine albumin-to-creatinine ratio (ACR)')+f' ({acr_unit})',key='acr',placeholder=T('Ingresa el valor','Enter value'))
         signature=(age_text,sex,cr_text,cys_text,acr_text,cr_unit,acr_unit)
         b1,b2,b3=st.columns([2,1,1])
         if b1.button(T('Calcular','Calculate'),type='primary',use_container_width=True) or st.session_state.pop('example_requested',False):
