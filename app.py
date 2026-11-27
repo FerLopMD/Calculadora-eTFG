@@ -140,7 +140,7 @@ def main():
             st.caption(T('Introduce al menos un marcador de filtración.','Enter at least one filtration marker.'))
             cys_text=st.text_input(T('Cistatina C sérica (mg/L)','Serum cystatin C (mg/L)'),key='cys',placeholder=T('Ingresa el valor','Enter value'))
         st.caption(T('Para la ecuación combinada, se prefieren resultados de ambos marcadores obtenidos de la misma muestra. Cambiar unidades borra el campo correspondiente.','For the combined equation, both markers should preferably be measured in the same sample. Changing units clears the corresponding field.'))
-        with st.expander(T('Albuminuria (opcional)','Albuminuria (optional)'),expanded=True):
+        with st.expander(T('Albuminuria (opcional)','Albuminuria (optional)'),expanded=False):
             acr_unit=st.radio(T('Unidad de RAC urinaria','Urine ACR unit'),['mg/g','mg/mmol'],horizontal=True,key='acr_unit',on_change=clear_acr)
             acr_text=st.text_input(T('Relación albúmina/creatinina urinaria (RAC)','Urine albumin-to-creatinine ratio (ACR)')+f' ({acr_unit})',key='acr',placeholder=T('Ingresa el valor','Enter value'))
         signature=(age_text,sex,cr_text,cys_text,acr_text,cr_unit,acr_unit)
